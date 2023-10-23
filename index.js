@@ -1,17 +1,15 @@
-
-
+// This class manages the "Biome" class.
 class Zoo {
     constructor(biomes) {
         this.biomes = biomes;
     }
-
+    
     findbestBiome(animal){
         let bestNum = 0;
         let bestbiome;
     
         for (let biome of this.biomes) {
             let total = 0;
-    
             if (animal.prefForest === biome.isForested) {
                 total++
             }
@@ -22,13 +20,12 @@ class Zoo {
                 bestbiome = biome;
                 bestNum = total;
             }
-    
         }
         console.log(bestbiome)
         bestbiome.currentAnimals.push(animal);
     }
 }
-
+// This class represents what a "Biome" is.
 class Biome {
     constructor(name,isForested,temperature) {
         this.name = name;
@@ -41,10 +38,10 @@ class Biome {
 const jungle = new Biome("Jungle", true, 65);
 const savanah = new Biome("Savanah", false, 80);
 
-
 let biomes = [jungle,savanah];
 let bAndH = new Zoo(biomes);
 
+// This class represents what an "Animal" is.
 class Animal {
     constructor(name,prefForest,prefTemp) {
         this.name = name;
@@ -55,6 +52,7 @@ class Animal {
 
 const elephant = new Animal("Elephant",false,[65,99]);
 
+// This function gets the user input to create a new animal.
 function newAnimal() {
     let animalName = prompt("What is the animal's name?");
     let location = prompt("Does it prefer forest?");
@@ -64,7 +62,7 @@ function newAnimal() {
     console.log(newAnimalInstance)
 }
 
-
+// This is the DOM manipulation.
 document.addEventListener("DOMContentLoaded", function() {
     const form = document.getElementById('animalForm');
     
