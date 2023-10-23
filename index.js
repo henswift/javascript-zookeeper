@@ -1,51 +1,20 @@
-/* What functionality do we want?
+// let pokemon = ['Pikachu','Charmander','Squirtle'];
+// let question = `Which of the following do you select?`
 
-    If a biologist found a new animal we could classify it. 
+// let choice = getSelection(question,pokemon);
+// console.log(choice);
 
-    The end user can put in descriptors about what they see and it would tell them what class they are in
+// function getSelection(question,options) {
 
-    Does it have fur? = Mammels
+//     let string = "";
+//     for (let x = 0; x < options.length; x++) {
+//         string += '\n' + `${x+1}: ${options[x]}`;
+//     }
 
-    We would have to guide the user to the right category
+//     let choice = prompt(`${question} \n ${string}`);
+//     return options[choice-1]
+// }
 
-    We have to define our arena
-
-
-    The first step:
-
-     We need animals
-
-
-
-     We could make a tool for a new zookeeper to see if he could put to animals together
-
-     make properties for all the animals - like isAMeatEater
-
-     then maybe make new animals and see how they relate
-
-
-let pokemon = ['Pikachu','Charmander','Squirtle'];
-let question = `Which of the following do you select?`
-
-let choice = getSelection(question,pokemon);
-console.log(choice);
-
-function getSelection(question,options) {
-
-    let string = "";
-    for (let x = 0; x < options.length; x++) {
-        string += '\n' + `${x+1}: ${options[x]}`;
-    }
-
-    let choice = prompt(`${question} \n ${string}`);
-    return options[choice-1]
-}
-
-
-
-
-
-    */
 
  /* What we need    
     Animal objects
@@ -165,6 +134,35 @@ function newAnimal() {
 }
 
 
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById('animalForm');
+    
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const animalName = document.getElementById('animalName').value;
+        const prefForest = document.getElementById('prefForest').value === "true";
+        const prefTemp = parseInt(document.getElementById('prefTemp').value);
+        
+        const newAnimal = new Animal(animalName, prefForest, prefTemp);
+        bAndH.findbestBiome(newAnimal);
+        
+        // Display current animals
+        let output = "";
+        bAndH.biomes.forEach(biome => {
+            output += `<h2>${biome.name}</h2><ul>`;
+            biome.currentAnimals.forEach(animal => {
+                output += `<li>${animal.name}</li>`;
+            });
+            output += `</ul>`;
+        });
+        
+        document.getElementById('animalList').innerHTML = output;
+    });
+});
+
+
+
 
 //Takes one animal object
 // For each biome in biomes 
@@ -175,9 +173,6 @@ function newAnimal() {
     //Output the biome with the most matches
 
 
-// console.log(elephant)
-
-
 // Now we need to create a function so that when the user puts in the traits it will 
 // first create the animal 
 // and then check the animal
@@ -185,4 +180,4 @@ function newAnimal() {
 // create a for biomes in biomes loop and check the properties
 
 
-// console.log(jungle)
+
